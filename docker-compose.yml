@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  app:
+    container_name: 'seenable-api'
+    image: python:3.12
+    networks:
+      - seenable_network
+    working_dir: /usr/src/python
+    volumes:
+      - .:/usr/src/python
+    ports:
+      - 8080:8080
+    tty: true
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    container_name: 'seenable-db'
+    image: mongo:8.0.0-rc4
+    networks:
+      - seenable_network
+    volumes:
+      - seenable_mongodb:/data/db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+
+volumes:
+  seenable_mongodb:
+
+networks:
+  seenable_network:

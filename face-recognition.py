@@ -1,25 +1,30 @@
 import face_recognition
 from PIL import Image, ImageDraw
+import numpy as np
 
-# 画像を読み込む
-load_image = face_recognition.load_image_file("images/train/train_img2.jpg")
+# 画像を読み込み、顔の特徴値を取得する
+arata_image = face_recognition.load_image_file("images/train/train_img1.png")
+arata_face_location = face_recognition.face_locations(arata_image, model="hog")
+arata_face_encoding = face_recognition.face_encodings(arata_image, arata_face_location)[0]
 
-# 認識させたい画像から顔検出する
-face_locations = face_recognition.face_locations(load_image)
+known_face_encodings = [
+    arata_face_encoding,
+]
+known_face_names = [
+    "新田真剣佑",
+]
 
-pil_image = Image.fromarray(load_image)
-draw = ImageDraw.Draw(pil_image)
+# 画像を読み込み、顔の特徴値を取得する
+test_img = face_recognition.load_image_file("images/test/test_img1.png")
+test_img_location = face_recognition.face_locations(test_img, model="hog")
+test_img_encoding = face_recognition.face_encodings(test_img, test_img_location)[0]
 
-# 検出した顔分ループする
-for (top, right, bottom, left) in face_locations:
-    # 顔の周りに四角を描画する
-    draw.rectangle(((left, top), (right, bottom)),
-                   outline=(255, 0, 0), width=2)
+dists = face_recognition.face_distance(known_face_encodings, test_img_encoding)
 
-del draw
+answer = '人が違います'
+for dist in dists:
+    if dist < 0.45:
+        answer = known_face_names[0]
 
-# # 結果の画像を表示する
-# pil_image.show()
-
-#　画像を保存
-pil_image.save('images/train/output2.png')
+# 顔認証の結果を出力する
+print(answer)

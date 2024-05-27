@@ -20,3 +20,8 @@ opencv-pythonのインストール：
 ```
 pip install opencv-python
 ```
+
+mongoDBをPythonから操作するためにインストール：
+```
+pip install pymongo
+```

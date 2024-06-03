@@ -1,27 +1,25 @@
 import face_recognition
 from PIL import Image, ImageDraw
 import numpy as np
+import glob
+import os
+
+
+known_face_encodings = []
+known_face_names = []
+files = glob.glob("./images/train/*")
+
+for file in files:
+    print(file)
+    # 画像を読み込み、顔の特徴値を取得する
+    train_image = face_recognition.load_image_file(file)
+    train_face_location = face_recognition.face_locations(train_image, model="hog")
+    known_face_encodings.append(face_recognition.face_encodings(train_image, train_face_location)[0])
+    known_face_names.append(os.path.split(file)[1].split('.')[0])
+    print(os.path.split(file)[1].split('.')[0])
 
 # 画像を読み込み、顔の特徴値を取得する
-arata_image = face_recognition.load_image_file("images/train/train_img1.png")
-arata_face_location = face_recognition.face_locations(arata_image, model="hog")
-arata_face_encoding = face_recognition.face_encodings(arata_image, arata_face_location)[0]
-
-shirota_image = face_recognition.load_image_file("images/train/train_img2.png")
-shirota_face_location = face_recognition.face_locations(shirota_image, model="hog")
-shirota_face_encoding = face_recognition.face_encodings(shirota_image, shirota_face_location)[0]
-
-known_face_encodings = [
-    arata_face_encoding,
-    shirota_face_encoding,
-]
-known_face_names = [
-    "新田真剣佑",
-    "城田優",
-]
-
-# 画像を読み込み、顔の特徴値を取得する
-test_img = face_recognition.load_image_file("images/test/test_img2.png")
+test_img = face_recognition.load_image_file("images/test/IMG_2323.jpg")
 test_img_location = face_recognition.face_locations(test_img, model="hog")
 test_img_encoding = face_recognition.face_encodings(test_img, test_img_location)[0]
 

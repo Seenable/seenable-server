@@ -16,12 +16,20 @@ face-recognitionのインストール：
 pip install face-recognition
 ```
 
-opencv-pythonのインストール：
-```
-pip install opencv-python
-```
-
 mongoDBをPythonから操作するためにインストール：
 ```
 pip install pymongo
+```
+
+FastAPIを使用するためにインストール:
+```
+pip install fastapi
+```
+
+FastAPI
+```
+uvicorn main:app --reload
+
+// 上記コマンドでエラーが出た場合、以下のコマンドでライブラリをインストールしてみてください！
+// pip install "uvicorn[standard]"
 ```

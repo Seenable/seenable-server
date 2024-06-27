@@ -13,9 +13,6 @@ def read_root():
 
     decodeImg = base64.b64decode(encodeImg)
 
-    with open("./app/images/decode/test5.png", 'bw') as f3:
-        f3.write(decodeImg)
-
     jpeg = np.frombuffer(decodeImg, dtype=np.uint8)
     img = cv2.imdecode(jpeg, cv2.IMREAD_COLOR)
 

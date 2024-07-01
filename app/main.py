@@ -1,5 +1,6 @@
 from app.feature.face_recognition_summary import FaceRecognitionSummary
 from fastapi import FastAPI
+from pydantic import BaseModel
 import app.feature.db as db
 import base64
 import numpy as np

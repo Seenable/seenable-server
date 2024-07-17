@@ -15,3 +15,6 @@ class DB(object):
 
     def find(self, projection=None,filter=None, sort=None):
         return self.collection.find(projection=projection,filter=filter,sort=sort)
+
+    def insert_one(self, document):
+        return self.collection.insert_one(document)

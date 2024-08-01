@@ -29,6 +29,7 @@ apt -y install libopencv-dev
 pip uninstall -y numpy
 python -m pip install numpy==1.26.4
 
+
 // 以下エラー文
 ModuleNotFoundError: No module named 'multipart'
 

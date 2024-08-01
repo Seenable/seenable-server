@@ -28,6 +28,12 @@ apt -y install libopencv-dev
 // 対策
 pip uninstall -y numpy
 python -m pip install numpy==1.26.4
+
+// 以下エラー文
+ModuleNotFoundError: No module named 'multipart'
+
+// 対策
+pip install python-multipart
 ```
 
 ## 顔認証の準備
